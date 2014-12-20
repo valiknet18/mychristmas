@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
+use AppBundle\Entity\Theme;
 use AppBundle\Form\Type\AddPostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -59,9 +60,12 @@ class PostController extends Controller
     /**
      * @Route("/create")
      * @Method({"GET", "POST"})
+     * @Template()
      */
     public function createAction(Request $request)
     {
+
+
         $em = $this->getDoctrine()->getManager();
 
         $post = new Post();
@@ -71,6 +75,24 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            $themeName = $request->request->get('theme');
+
+            $theme = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:Theme')
+                    ->findByName($themeName);
+
+            if (!$theme) {
+                $theme = new Theme();
+                $theme->setName($themeName);
+
+                $em->persist($theme);
+
+                $post->setTheme($theme);
+            } else {
+                $post->setTheme($theme);
+            }
+
             $em->persist($post);
             $em->flush();
 

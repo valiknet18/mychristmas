@@ -10,20 +10,15 @@ class AddPostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'radio', [
-                'data' => array(
-                    'like',
-                    'dislike'
-                )
+            ->add('theme', 'text', [
+                'mapped' => false
             ])
-            ->add('theme')
             ->add('author')
             ->add('description')
             ->add('images', 'collection', [
                 'type' => new AddImageType(),
                 'allow_add' => true
             ]);
-
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
