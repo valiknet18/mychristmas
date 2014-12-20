@@ -103,4 +103,9 @@ class Theme
     {
         return $this->posts;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
