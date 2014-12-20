@@ -38,6 +38,7 @@ class PostController extends Controller
     }
 
     /**
+     * @Template()
      * @Route("/{id}/view")
      * @Method("GET")
      */

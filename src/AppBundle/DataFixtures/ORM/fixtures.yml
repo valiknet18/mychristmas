@@ -4,6 +4,8 @@ AppBundle\Entity\Post:
     description: <realText()>
     createdAt: <dateTimeBetween('-5 years', '+5 years')>
     theme: @themes*
+    like: <numberBetween(1, 100)>
+    dislike: <numberBetween(1, 100)>
 
 AppBundle\Entity\Comment:
   comments{1..50}:

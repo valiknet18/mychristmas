@@ -7,12 +7,17 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="thumbnail">
                         <div class="caption">
-                        <h3>{{ post.author }}</h3>
-                        <h4>{{ post.createdAt|date }}</h4>
-                        <p>{{ post.description }}</p>
-                            <p>{{ post.theme }}</p>
-
-                    </div>
+                            <h2>{{ post.theme }}</h2>
+                            <h3>{{ post.author }}</h3>
+                            <p>{{ post.description }}</p>
+                            <h4>{{ post.createdAt|date }}</h4>
+                            <div>
+                                <a href="#"></a> <span class="badge">{{ post.like }}</span>
+                            </div>
+                            <div>
+                                <a href="#"></a> <span class="badge">{{ post.dislike }}</span>
+                            </div>
+                        </div>
                 </div>
             </div>
         {% endfor %}
