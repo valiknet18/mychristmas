@@ -43,4 +43,4 @@ before_script:
     - php app/check.php
 
 script:
-#  - bin/phpunit -c app
+  - phpunit -c app/
