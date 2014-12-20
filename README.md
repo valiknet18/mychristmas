@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/valiknet18/mychristmas.svg?branch=dev)](https://travis-ci.org/valiknet18/mychristmas)
+
 Symfony Standard Edition
 ========================
 
