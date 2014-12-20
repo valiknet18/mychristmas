@@ -52,8 +52,11 @@ class PostController extends Controller
                 ->getRepository('AppBundle:Post')
                 ->findOneById($id);
 
+        $comments = $this->get('appbundle.service.post_service')->splitComment($post->getComments());
+
         return [
-            "post" => $post
+            "post" => $post,
+            "comments" => $comments
         ];
     }
 
@@ -73,7 +76,7 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->get('appbundle.service.post_service')->shortcutLiks($em,$post ,$this , $request->request->get('addPost')['images']);
+            $this->get('appbundle.service.post_service')->shortcutLiks($em, $post, $this, $request->request->get('addPost')['images']);
 
             $themeName = $request->request->get('addPost')['theme'];
 
