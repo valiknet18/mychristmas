@@ -1,6 +1,8 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Post;
+use AppBundle\Form\Type\AddPostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -50,6 +52,32 @@ class PostController extends Controller
 
         return [
             "post" => $post
+        ];
+    }
+
+    /**
+     * @Route("/create")
+     * @Method({"GET", "POST"})
+     */
+    public function createAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = new Post();
+
+        $form = $this->createForm(new AddPostType(), $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('app_default_index');
+        }
+
+        return [
+            'form' => $form->createView()
         ];
     }
 }

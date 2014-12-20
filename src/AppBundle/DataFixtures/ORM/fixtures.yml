@@ -3,6 +3,7 @@ AppBundle\Entity\Post:
     author: <firstName()>
     description: <realText()>
     createdAt: <dateTimeBetween('-5 years', '+5 years')>
+    <numberBetween(1, 100)>
     theme: @themes*
 
 AppBundle\Entity\Comment:
