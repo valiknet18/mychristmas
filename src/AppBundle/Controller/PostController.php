@@ -5,6 +5,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route("/post")
@@ -16,12 +17,19 @@ class PostController extends Controller
      * @Method({"GET"})
      * @Template()
      */
-    public function topAction($type)
+    public function topAction($type, Request $request)
     {
         $posts = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Post')
             ->findAll();
+
+        $paginator  = $this->get('knp_paginator');
+        $posts = $paginator->paginate(
+            $posts,
+            $request->query->get('page', 1),
+            10
+        );
 
         return [
             "posts" => $posts,
