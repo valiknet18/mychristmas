@@ -53,9 +53,14 @@ class Post
     /**
      * @var \stdClass
      *
-     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="post")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
      */
     private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="post")
+     */
+    private $images;
 
     /**
      * Get id
@@ -233,5 +238,38 @@ class Post
         $this->comments = $comments;
 
         return $this;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \AppBundle\Entity\Image $images
+     * @return Post
+     */
+    public function addImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \AppBundle\Entity\Image $images
+     */
+    public function removeImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

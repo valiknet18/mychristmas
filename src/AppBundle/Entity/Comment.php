@@ -40,7 +40,7 @@ class Comment
     protected $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
      */
     protected $post;
     /**
@@ -184,5 +184,18 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Set post
+     *
+     * @param \AppBundle\Entity\Post $post
+     * @return Comment
+     */
+    public function setPost(\AppBundle\Entity\Post $post = null)
+    {
+        $this->post = $post;
+
+        return $this;
     }
 }

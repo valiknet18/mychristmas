@@ -101,10 +101,9 @@ mremi_url_shortener:
     link_class: Mremi\UrlShortener\Model\Link
 
     providers:
-        bitly:
-            enabled:             true
-            username:            your_bitly_username
-            password:            your_bitly_password
-            options:
-                connect_timeout: 1
-                timeout:         1
+        google:
+              enabled:             true
+              api_key:             AIzaSyDEAuEsau15_lgiayHuO5oXphGvFmKZPO4
+              options:
+                  connect_timeout: 1
+                  timeout:         1
