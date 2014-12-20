@@ -17,7 +17,7 @@ class AddPostType extends AbstractType
             ->add('description')
             ->add('images', 'collection', [
                 'type' => new AddImageType(),
-                'allow_add' => true
+                'allow_add' => true,
             ]);
     }
 

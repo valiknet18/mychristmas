@@ -4,6 +4,8 @@
 {% block container %}
     <div class="row">
         <form method="POST">
+            {{ form_errors(form) }}
+
             <div>
                 {{ form_row(form.theme) }}
             </div>
@@ -20,6 +22,10 @@
                 <ul class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
 
                 </ul>
+            </div>
+
+            <div>
+                {{ form_rest(form) }}
             </div>
 
             <div>

@@ -64,8 +64,6 @@ class PostController extends Controller
      */
     public function createAction(Request $request)
     {
-
-
         $em = $this->getDoctrine()->getManager();
 
         $post = new Post();
@@ -75,7 +73,9 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $themeName = $request->request->get('theme');
+            $this->get('appbundle.service.post_service')->shortcutLiks($em,$post ,$this , $request->request->get('addPost')['images']);
+
+            $themeName = $request->request->get('addPost')['theme'];
 
             $theme = $this->getDoctrine()
                     ->getManager()
