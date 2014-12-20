@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Post
@@ -52,7 +53,7 @@ class Post
 
     /**
      * @var \DateTime
-     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="createdAt", type="datetime")
      */
     private $createdAt;
@@ -72,7 +73,7 @@ class Post
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="post", cascade={"persist"})
      */
     private $images;
 

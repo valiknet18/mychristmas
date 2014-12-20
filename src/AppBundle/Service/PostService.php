@@ -28,4 +28,23 @@ class PostService
             $em->persist($image);
         }
     }
+
+    public function splitComment($comments)
+    {
+        $likedComments = [];
+        $dislikedComments = [];
+
+        foreach ($comments as $comment) {
+            if ($comment->getType()) {
+                $likedComments[] = $comment;
+            } else {
+                $dislikedComments[] = $comment;
+            }
+        }
+
+        return [
+            $likedComments,
+            $dislikedComments
+        ];
+    }
 } 

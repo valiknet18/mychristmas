@@ -1,18 +1,19 @@
 {% extends 'base.html.twig' %}
-{% block content %}
+
+{% block container %}
         <div>
-        <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
-        {{ post.description }}
-        </div>
-        <div><h3>Комментарий</h3>
-            <form id="comment_add" role="form" action="{{ path("comment_add") }}" method="POST">
-                <div>
-                    {{ form_widget(form) }}
-                </div>
-                <div>
-                    <input type="submit" value="Добаваит комментарий">
-                </div>
-                {{ form_rest(form) }}
-            </form>
+            <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
+            {{ post.description }}
+            </div>
+            <div><h3>Комментарий</h3>
+                {#<form id="comment_add" role="form" action="{{ path("comment_add") }}" method="POST">#}
+                    {#<div>#}
+                        {#{{ form_widget(form) }}#}
+                    {#</div>#}
+                    {#<div>#}
+                        {#<input type="submit" value="Добаваит комментарий">#}
+                    {#</div>#}
+                    {#{{ form_rest(form) }}#}
+                {#</form>#}
         </div>
 {% endblock %}
