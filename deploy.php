@@ -8,6 +8,3 @@ server('students-hackathon', $parameters['parameters']['prod_server_ip'])
     ->user('root', $parameters['parameters']['prod_server_pass'])
 ;
 set('repository', $parameters['parameters']['https_github_repository_url']);
-task('deploy:end', function () {
-    run('chmod 777 -R current/app/cache current/app/logs');
-});
