@@ -15,7 +15,7 @@ class Post
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -25,16 +25,30 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(type="text")
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", name="`like`", nullable=true)
+     */
+    private $like;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $dislike;
 
     /**
      * @var \DateTime
@@ -271,5 +285,51 @@ class Post
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set like
+     *
+     * @param integer $like
+     * @return Post
+     */
+    public function setLike($like)
+    {
+        $this->like = $like;
+
+        return $this;
+    }
+
+    /**
+     * Get like
+     *
+     * @return integer 
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * Set dislike
+     *
+     * @param integer $dislike
+     * @return Post
+     */
+    public function setDislike($dislike)
+    {
+        $this->dislike = $dislike;
+
+        return $this;
+    }
+
+    /**
+     * Get dislike
+     *
+     * @return integer 
+     */
+    public function getDislike()
+    {
+        return $this->dislike;
     }
 }
