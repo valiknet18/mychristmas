@@ -1,0 +1,9 @@
+language: php
+php:
+  - "5.5"
+
+env:
+  - SYMFONY_VERSION=2.6.*
+
+script:
+  - bin/phpunit -c app
