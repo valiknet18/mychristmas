@@ -18,3 +18,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    domain: your-project.hackathon.pp.ua
+    prod_server_ip: 000.00.000.00
+    prod_server_pass: 123456
+    https_github_repository_url: https://github.com/username/repository.git
