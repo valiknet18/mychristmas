@@ -11,7 +11,7 @@ AppBundle\Entity\Comment:
     description: <realText()>
     createdAt: <dateTimeBetween('-5 years', '+5 years')>
     post: @posts*
-    type: boolean(50)
+    type: <boolean(50)>
 
 AppBundle\Entity\Theme:
   themes{1..10}:
