@@ -1,6 +1,9 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Post;
+use AppBundle\Entity\Theme;
+use AppBundle\Form\Type\AddPostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -38,6 +41,7 @@ class PostController extends Controller
     }
 
     /**
+     * @Template()
      * @Route("/{id}/view")
      * @Method("GET")
      */
@@ -50,6 +54,53 @@ class PostController extends Controller
 
         return [
             "post" => $post
+        ];
+    }
+
+    /**
+     * @Route("/create")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function createAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $post = new Post();
+
+        $form = $this->createForm(new AddPostType(), $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $this->get('appbundle.service.post_service')->shortcutLiks($em,$post ,$this , $request->request->get('addPost')['images']);
+
+            $themeName = $request->request->get('addPost')['theme'];
+
+            $theme = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:Theme')
+                    ->findByName($themeName);
+
+            if (!$theme) {
+                $theme = new Theme();
+                $theme->setName($themeName);
+
+                $em->persist($theme);
+
+                $post->setTheme($theme);
+            } else {
+                $post->setTheme($theme);
+            }
+
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('app_default_index');
+        }
+
+        return [
+            'form' => $form->createView()
         ];
     }
 }
