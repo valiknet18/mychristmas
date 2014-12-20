@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Theme
@@ -30,6 +31,18 @@ class Theme
      * @ORM\OneToMany(targetEntity="Post", mappedBy="theme")
      */
     protected $posts;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $convertedName;
+
     /**
      * Constructor
      */
@@ -107,5 +120,51 @@ class Theme
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Theme
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set convertedName
+     *
+     * @param string $convertedName
+     * @return Theme
+     */
+    public function setConvertedName($convertedName)
+    {
+        $this->convertedName = $convertedName;
+
+        return $this;
+    }
+
+    /**
+     * Get convertedName
+     *
+     * @return string 
+     */
+    public function getConvertedName()
+    {
+        return $this->convertedName;
     }
 }

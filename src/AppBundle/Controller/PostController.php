@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Theme;
 use AppBundle\Form\Type\AddCommentType;
@@ -80,9 +81,18 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->get('appbundle.service.post_service')->shortcutLiks($em, $post, $this, $request->request->get('addPost')['images']);
+            $links = $request->request->get('addPost')['images'];
 
-            $themeName = $request->request->get('addPost')['theme'];
+            foreach ($links as $link) {
+                $image = new Image();
+                $image->setLongUrl($link['long_url']);
+                $image->setPost($post);
+
+                $em->persist($image);
+                $em->refresh($image);
+            }
+
+            $themeName = $this->get('appbundle.service.post_service')->themeConvert($request->request->get('addPost')['theme']);
 
             $theme = $this->getDoctrine()
                     ->getManager()
@@ -91,11 +101,13 @@ class PostController extends Controller
 
             if (!$theme) {
                 $theme = new Theme();
-                $theme->setName($themeName);
+                $theme->setName($request->request->get('addPost')['theme']);
+                $theme->setConvertedName($themeName);
 
                 $em->persist($theme);
 
                 $post->setTheme($theme);
+
             } else {
                 $post->setTheme($theme);
             }

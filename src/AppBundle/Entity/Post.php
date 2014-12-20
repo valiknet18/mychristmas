@@ -54,7 +54,7 @@ class Post
     /**
      * @var \DateTime
      * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
@@ -73,9 +73,18 @@ class Post
     private $comments;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="post", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="post")
      */
     private $images;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -85,52 +94,6 @@ class Post
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set theme
-     *
-     * @param \stdClass $theme
-     * @return Post
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Get theme
-     *
-     * @return \stdClass 
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param \stdClass $comment
-     * @return Post
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return \stdClass 
-     */
-    public function getComment()
-    {
-        return $this->comment;
     }
 
     /**
@@ -180,115 +143,6 @@ class Post
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Post
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add comments
-     *
-     * @param \AppBundle\Entity\Comment $comments
-     * @return Post
-     */
-    public function addComment(\AppBundle\Entity\Comment $comments)
-    {
-        $this->comments[] = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Remove comments
-     *
-     * @param \AppBundle\Entity\Comment $comments
-     */
-    public function removeComment(\AppBundle\Entity\Comment $comments)
-    {
-        $this->comments->removeElement($comments);
-    }
-
-    /**
-     * Get comments
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Set comments
-     *
-     * @param \AppBundle\Entity\Comment $comments
-     * @return Post
-     */
-    public function setComments(\AppBundle\Entity\Comment $comments = null)
-    {
-        $this->comments = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Add images
-     *
-     * @param \AppBundle\Entity\Image $images
-     * @return Post
-     */
-    public function addImage(\AppBundle\Entity\Image $images)
-    {
-        $this->images[] = $images;
-
-        return $this;
-    }
-
-    /**
-     * Remove images
-     *
-     * @param \AppBundle\Entity\Image $images
-     */
-    public function removeImage(\AppBundle\Entity\Image $images)
-    {
-        $this->images->removeElement($images);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
      * Set like
      *
      * @param integer $like
@@ -332,5 +186,117 @@ class Post
     public function getDislike()
     {
         return $this->dislike;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Post
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param \AppBundle\Entity\Theme $theme
+     * @return Post
+     */
+    public function setTheme(\AppBundle\Entity\Theme $theme = null)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return \AppBundle\Entity\Theme 
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     * @return Post
+     */
+    public function addComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \AppBundle\Entity\Comment $comments
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \AppBundle\Entity\Image $images
+     * @return Post
+     */
+    public function addImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \AppBundle\Entity\Image $images
+     */
+    public function removeImage(\AppBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

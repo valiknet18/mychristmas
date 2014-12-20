@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table()
  */
-class Image extends BaseLink
+class Image
 {
     /**
      * @ORM\Column(type="integer")
@@ -21,9 +21,14 @@ class Image extends BaseLink
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="images", cascade={"persist"})
      */
     protected $post;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $longUrl;
 
     /**
      * Get id
@@ -56,5 +61,28 @@ class Image extends BaseLink
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Set longUrl
+     *
+     * @param string $longUrl
+     * @return Image
+     */
+    public function setLongUrl($longUrl)
+    {
+        $this->longUrl = $longUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get longUrl
+     *
+     * @return string 
+     */
+    public function getLongUrl()
+    {
+        return $this->longUrl;
     }
 }
