@@ -1,0 +1,18 @@
+AppBundle\Entity\Post:
+  posts{1..25}:
+    author: <firstName()>
+    description: <realText()>
+    createdAt: <dateTimeBetween('-5 years', '+5 years')>
+    theme: @themes*
+
+AppBundle\Entity\Comment:
+  comments{1..50}:
+    author: <firstName()>
+    description: <realText()>
+    createdAt: <dateTimeBetween('-5 years', '+5 years')>
+    post: @posts*
+    type: boolean(50)
+
+AppBundle\Entity\Theme:
+  themes{1..10}:
+    name: <word()>
