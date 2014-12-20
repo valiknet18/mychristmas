@@ -2,18 +2,50 @@
 
 {% block container %}
         <div>
-            <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
+            <h3>{{ post.author }}</h3>
+            Написал {{ post.createdAt|date}}
             {{ post.description }}
+        </div>
+        <div>
+            <h3>Комментарий</h3>
+            <div class="col-lg-6">
+                <h3>Кул</h3>
+                <div>
+                    {% for comment in comments[0] %}
+                        <div>
+                            <b>{{ comment.author }}</b>
+                            {{ comment.description }}
+
+                            Создано: {{ comment.createdAt|date }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div><h3>Комментарий</h3>
-                {#<form id="comment_add" role="form" action="{{ path("comment_add") }}" method="POST">#}
-                    {#<div>#}
-                        {#{{ form_widget(form) }}#}
-                    {#</div>#}
-                    {#<div>#}
-                        {#<input type="submit" value="Добаваит комментарий">#}
-                    {#</div>#}
-                    {#{{ form_rest(form) }}#}
-                {#</form>#}
+
+            <div class="col-lg-6">
+                <h3>Не Кул</h3>
+                <div>
+                    {% for comment in comments[1] %}
+                        <div>
+                            <b>{{ comment.author }}</b>
+                            {{ comment.description }}
+
+                            Создано: {{ comment.createdAt|date }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <form id="comment_add" role="form" action="{{ path("comment_add", {"id":post.id}) }}" method="POST">
+                <div>
+                    {{ form_widget(form) }}
+                </div>
+
+                {{ form_rest(form) }}
+
+                <div>
+                    <input type="submit" value="Добавать комментарий">
+                </div>
+            </form>
         </div>
 {% endblock %}

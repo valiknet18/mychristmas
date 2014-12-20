@@ -3,6 +3,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Theme;
+use AppBundle\Form\Type\AddCommentType;
 use AppBundle\Form\Type\AddPostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -47,6 +48,8 @@ class PostController extends Controller
      */
     public function getAction($id)
     {
+        $form = $this->createForm(new AddCommentType());
+
         $post = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:Post')
@@ -56,7 +59,8 @@ class PostController extends Controller
 
         return [
             "post" => $post,
-            "comments" => $comments
+            "comments" => $comments,
+            "form" => $form->createView()
         ];
     }
 

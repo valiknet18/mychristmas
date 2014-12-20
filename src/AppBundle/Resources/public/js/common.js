@@ -39,3 +39,10 @@ function addTagForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
+
+
+$(document).on('submit', '#comment_add', function(e){
+    e.preventDefault();
+
+    
+});
