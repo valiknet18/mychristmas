@@ -11,7 +11,7 @@ use AppBundle\Entity;
 class DefaultController extends Controller
 {
     /**
-     * @Template()
+     * @Template ()
      * @Route("/")
      * @Method({"GET"})
      */
