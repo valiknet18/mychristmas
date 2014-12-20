@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Ьнсркшыеьфы{% endblock %}</title>
+    <title>{% block title %}Ьнсркшіеьфі{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     {% endblock %}
@@ -14,9 +14,9 @@
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="">Mychristmas</a>
+                    <a class="navbar-brand" href="{{ path('app_default_index') }}">Mychristmas</a>
                 </div>
-                <div><a class="btn btn-default navbar-btn" type="button" href="">Рассказать всем</a></div>
+                <div><a class="btn btn-default navbar-btn" type="button" href="{{ path('app_post_create') }}">Рассказать всем</a></div>
             </div>
         </nav>
         {% block container %}
