@@ -163,14 +163,6 @@ class Comment
      */
     public function addPost(\AppBundle\Entity\Post $post)
     {
-        if ($this->type) {
-            $count = $post->getLike();
-            $post->setLike($count + 1);
-        } else {
-            $count = $post->getDislike();
-            $post->setDislike($count + 1);
-        }
-
         $this->post[] = $post;
 
         return $this;
@@ -204,6 +196,14 @@ class Comment
      */
     public function setPost(\AppBundle\Entity\Post $post = null)
     {
+        if ($this->type) {
+            $count = $post->getLike();
+            $post->setLike($count + 1);
+        } else {
+            $count = $post->getDislike();
+            $post->setDislike($count + 1);
+        }
+
         $this->post = $post;
 
         return $this;
