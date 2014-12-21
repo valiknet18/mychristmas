@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class CommentController extends Controller
 {
     /**
-     * @Route("{id}/create", name="comment_add")
+     * @Route("/{id}/create", name="comment_add")
      * @Method({"POST"})
      */
     public function createAction($id, Request $request)
@@ -33,9 +33,9 @@ class CommentController extends Controller
             $post = $this->getDoctrine()
                     ->getManager()
                     ->getRepository('AppBundle:Post')
-                    ->findById($id);
+                    ->findOneById($id);
 
-            if ($post) {
+            if (!$post) {
                 return JsonResponse::create(null, 404);
             }
 

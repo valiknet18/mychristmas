@@ -44,5 +44,24 @@ function addTagForm($collectionHolder, $newLinkLi) {
 $(document).on('submit', '#comment_add', function(e){
     e.preventDefault();
 
-    
+    var data = $(this).serialize();
+
+    $.ajax({
+        url: $(this).attr("action"),
+        type: $(this).attr("method"),
+        data: data
+    }).done(function(data, code, object){;
+
+        switch (object.status) {
+            case 200:
+                document.location.reload();
+                break;
+            case 404:
+                    alert('Post not found');
+                break;
+            case 500:
+                    alert('Internal server error')
+                break;
+        }
+    });
 });

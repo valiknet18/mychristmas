@@ -13,8 +13,12 @@ class AddCommentType extends AbstractType
             ->add('author')
             ->add('description')
             ->add('type', 'choice', array(
-        'choices' => array('1' => 'Кул' , 'Не кул')
-            ));
+                    'choices' => array(
+                        '1' => 'Кул' ,
+                        '0' => 'Не кул'
+                    )
+                )
+            );
     }
     public function setDefaults(OptionsResolver $resolver)
     {
