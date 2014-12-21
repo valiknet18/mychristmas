@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Post
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PostRepository")
  */
 class Post
 {

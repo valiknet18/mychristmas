@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @Route("/post")
@@ -24,10 +25,19 @@ class PostController extends Controller
      */
     public function topAction($type, Request $request)
     {
-        $posts = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Post')
-            ->findAll();
+
+        if ($type === 'like') {
+            $posts = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Post')
+                ->getTopLikedPost();
+        } else {
+            $posts = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Post')
+                ->getTopDislikedPost();
+        }
+
 
         $paginator  = $this->get('knp_paginator');
         $posts = $paginator->paginate(
@@ -37,8 +47,7 @@ class PostController extends Controller
         );
 
         return [
-            "posts" => $posts,
-            "type" => $type
+            "posts" => $posts
         ];
     }
 
