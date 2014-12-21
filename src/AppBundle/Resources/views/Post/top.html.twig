@@ -1,7 +1,45 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}
+    List popular posts
+{% endblock %}
+
 {% block container %}
-    <div>
-        Hello world
+    <div class="row col-md-12">
+        <div>
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation">
+                        <a href="{{ path("app_post_top", {'type':"like"}) }}">Liked</a>
+                    </li>
+
+                    <li role="presentation">
+                        <a href="{{ path("app_post_top", {'type':"dislike"}) }}">Disliked</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-md-6 col-md-offset-5">
+            {{ knp_pagination_render(posts) }}
+        </div>
+
+        {% for post in posts %}
+            <div class="col-md-6 col-md-offset-3">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <a href=""><h2>{{ post.theme }}</h2></a>
+                        <a href="{{ path("app_post_get", {"id" : post.id}) }}">{{ post.description }}</a>
+                        <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
+                        <br>
+                        <button class="btn btn-success" type="button"><span class="badge">{{ post.like }}</span>Likes</button>
+                        <button class="btn btn-danger" type="button">
+                            <span class="badge">{{ post.dislike }}</span>Dislikes
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
