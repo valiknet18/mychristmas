@@ -31,9 +31,14 @@ class PostService
         $arrayStringTheme = explode(' ', $theme);
 
         foreach ($arrayStringTheme as &$stringTheme) {
-            $stringTheme = ucfirst(strtolower(trim($stringTheme)));
+            $stringTheme = $this->mbUcfirst(strtolower(trim($stringTheme)));
         }
 
         return implode('', $arrayStringTheme);
+    }
+
+    public function mbUcfirst($string)
+    {
+        return mb_strtoupper(mb_substr($string, 0, 1, 'UTF-8'), 'UTF-8') . mb_substr($string, 1, mb_strlen($string), 'UTF-8');
     }
 } 

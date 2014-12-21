@@ -81,15 +81,16 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $links = $request->request->get('addPost')['images'];
+            if (isset($request->request->get('addPost')['images'])) {
+                $links = $request->request->get('addPost')['images'];
 
-            foreach ($links as $link) {
-                $image = new Image();
-                $image->setLongUrl($link['long_url']);
-                $image->setPost($post);
+                foreach ($links as $link) {
+                    $image = new Image();
+                    $image->setLongUrl($link['long_url']);
+                    $image->setPost($post);
 
-                $em->persist($image);
-                $em->refresh($image);
+                    $em->persist($image);
+                }
             }
 
             $themeName = $this->get('appbundle.service.post_service')->themeConvert($request->request->get('addPost')['theme']);
