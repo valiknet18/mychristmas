@@ -31,7 +31,7 @@ class PostService
         $arrayStringTheme = explode(' ', $theme);
 
         foreach ($arrayStringTheme as &$stringTheme) {
-            $stringTheme = ucfirst(trim($stringTheme));
+            $stringTheme = ucfirst(strtolower(trim($stringTheme)));
         }
 
         return implode('', $arrayStringTheme);
