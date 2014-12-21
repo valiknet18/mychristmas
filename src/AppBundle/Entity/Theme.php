@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Theme
  * @package AppBundle\Entity
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ThemeRepository")
  * @ORM\Table()
  */
 class Theme

@@ -25,6 +25,11 @@ class PostController extends Controller
      */
     public function topAction($type, Request $request)
     {
+        $themes = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('AppBundle:Theme')
+                    ->getTopPopularTheme();
+        VarDumper::dump($themes);
 
         if ($type === 'like') {
             $posts = $this->getDoctrine()
@@ -107,17 +112,16 @@ class PostController extends Controller
             $theme = $this->getDoctrine()
                     ->getManager()
                     ->getRepository('AppBundle:Theme')
-                    ->findByName($themeName);
+                    ->findOneByConvertedName($themeName);
 
             if (!$theme) {
                 $theme = new Theme();
                 $theme->setName($request->request->get('addPost')['theme']);
                 $theme->setConvertedName($themeName);
 
-                $em->persist($theme);
-
                 $post->setTheme($theme);
 
+                $em->persist($theme);
             } else {
                 $post->setTheme($theme);
             }
