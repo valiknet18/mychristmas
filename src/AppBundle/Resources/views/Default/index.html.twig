@@ -14,7 +14,7 @@
                         <div class="caption">
                             <a href="{{ path("app_theme_get", {"slug" : post.theme.slug}) }}"><h2>{{ post.theme }}</h2></a>
                             <a href="{{ path("app_post_get", {"id" : post.id}) }}">{{ post.description }}</a>
-                            <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
+                            <h3>{{ post.author }}</h3> Created at {{ post.createdAt|date}}
                             <br>
                             <button class="btn btn-success" type="button"><span class="badge">{{ post.like }}</span>Likes</button>
                             <button class="btn btn-danger" type="button">
