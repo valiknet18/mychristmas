@@ -3,7 +3,7 @@ namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddCommentType extends AbstractType
 {
@@ -11,11 +11,12 @@ class AddCommentType extends AbstractType
     {
         $builder
             ->add('author')
-            ->add('description');
-
+            ->add('description')
+            ->add('type', 'choice', array(
+        'choices' => array('1' => 'Кул' , 'Не кул')
+            ));
     }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaults(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Comment',
