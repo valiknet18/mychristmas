@@ -29,7 +29,6 @@ class PostController extends Controller
                     ->getManager()
                     ->getRepository('AppBundle:Theme')
                     ->getTopPopularTheme();
-        VarDumper::dump($themes);
 
         if ($type === 'like') {
             $posts = $this->getDoctrine()

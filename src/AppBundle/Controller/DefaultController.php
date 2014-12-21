@@ -17,7 +17,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $posts = $this->getDoctrine()->getManager()->getRepository('AppBundle:Post')->findAll();
+        $posts = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:Post')
+                ->findBy([], ["createdAt" => "DESC"]);
 
         $paginator  = $this->get('knp_paginator');
         $posts = $paginator->paginate(

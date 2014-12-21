@@ -17,7 +17,6 @@ class ThemeRepository extends EntityRepository
                     ->getRepository('AppBundle:Theme')
                     ->createQueryBuilder('t')
                     ->groupBy('t.convertedName')
-                    ->setMaxResults(10)
                     ->getQuery()
                     ->getResult();
 
@@ -28,6 +27,8 @@ class ThemeRepository extends EntityRepository
 
             return (COUNT($a->getPosts()) > COUNT($b->getPosts())) ? -1 : 1;
         });
+
+        $themes = array_slice($themes, 0, 15);
 
         return $themes;
     }
