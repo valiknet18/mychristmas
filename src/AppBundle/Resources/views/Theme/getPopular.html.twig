@@ -1,0 +1,10 @@
+<div class="col-md-12">
+    <ul>
+        <h4>Top theme</h4>
+        {% for theme in themes %}
+        <li>
+            <a href="{{ path('app_theme_get', {"slug" : theme.slug}) }}">{{ theme.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
