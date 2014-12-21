@@ -10,17 +10,22 @@
 </head>
 <body>
 {% block body %}
+    {% set currentPath = path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) %}
+
     <div class="container">
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ path('app_default_index') }}">Mychristmas</a>
+                    <a class="navbar-brand" href="#">My Christmas</a>
                 </div>
-                <div class="navbar-header">
-                    <a class="navbar-link" href="{{ path("app_post_top") }}">Топ 20</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="btn btn-default navbar-btn" type="button" href="{{ path('app_post_create') }}">Рассказать всем</a>
+
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li {% if currentPath == "/" %} class="active" {% endif %}><a href="{{ path('app_default_index') }}">Home</a></li>
+                        <li {% if currentPath == "/post/top" %} class="active" {% endif %}><a href="{{ path("app_post_top") }}">Топ 20</a></li>
+                        <li {% if currentPath == "/post/create" %} class="active" {% endif %}><a href="{{ path('app_post_create') }}">Рассказать всем</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
