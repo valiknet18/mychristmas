@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {% endblock %}
+{% block title %}All posts{% endblock %}
 
 {% block container %}
     <div class="row col-md-8">
@@ -12,7 +12,7 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="thumbnail">
                         <div class="caption">
-                            <a href=""><h2>{{ post.theme }}</h2></a>
+                            <a href="{{ path("app_theme_get", {"slug" : post.theme.slug}) }}"><h2>{{ post.theme }}</h2></a>
                             <a href="{{ path("app_post_get", {"id" : post.id}) }}">{{ post.description }}</a>
                             <h3>{{ post.author }}</h3> Написал {{ post.createdAt|date}}
                             <br>

@@ -1,8 +1,8 @@
 <div class="col-md-12">
-    <ul>
-        <h4>Top theme</h4>
+    <h4>Top themes:</h4>
+    <ul class="list-group">
         {% for theme in themes %}
-        <li>
+        <li class="list-group-item">
             <a href="{{ path('app_theme_get', {"slug" : theme.slug}) }}">{{ theme.name }}</a>
         </li>
         {% endfor %}

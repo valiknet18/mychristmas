@@ -18,7 +18,8 @@ class AddPostType extends AbstractType
             ->add('images', 'collection', [
                 'type' => new AddImageType(),
                 'allow_add' => true,
-                'mapped' => false
+                'mapped' => false,
+                "label" => "Photos"
             ]);
     }
 

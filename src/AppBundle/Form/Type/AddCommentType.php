@@ -14,8 +14,8 @@ class AddCommentType extends AbstractType
             ->add('description')
             ->add('type', 'choice', array(
                     'choices' => array(
-                        '1' => 'Кул' ,
-                        '0' => 'Не кул'
+                        '1' => 'Like' ,
+                        '0' => 'Dislike'
                     )
                 )
             );

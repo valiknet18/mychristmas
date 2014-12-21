@@ -1,5 +1,5 @@
-var $addTagLink = $('<a href="#" class="create_image">Add image</a>');
-var $newLinkLi = $('<li></li>').append($addTagLink);
+var $addTagLink = $('<a href="#" class="create_image">Add photo</a>');
+var $newLinkLi = $('<li class="list-group-item"></li>').append($addTagLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags
@@ -36,7 +36,7 @@ function addTagForm($collectionHolder, $newLinkLi) {
     $collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<li></li>').append(newForm);
+    var $newFormLi = $('<li class="list-group-item"></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
 
