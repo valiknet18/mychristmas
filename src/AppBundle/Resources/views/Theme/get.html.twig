@@ -7,7 +7,7 @@
         <div class="col-md-6 col-md-offset-4">
             {{ knp_pagination_render(posts) }}
         </div>
-        {% for post in posts %}
+        {% for post in posts|reverse %}
             <div class="col-md-6 col-md-offset-3">
                 <div class="thumbnail">
                     <div class="caption">
@@ -15,11 +15,12 @@
                         <a href="{{ path("app_post_get", {"id" : post.id}) }}">{{ post.description }}</a>
                         <h3>{{ post.author }}</h3> Create at {{ post.createdAt|date}}
                         <br>
-                        <button class="btn btn-success" type="button"><span class="badge">{{ post.like }}</span>Likes</button>
-                        <button class="btn btn-danger" type="button">
-                            <span class="badge">{{ post.dislike }}</span>Dislikes
-                        </button>
-
+                        <a href="{{ path("app_post_get", {"id" : post.id}) }}#comments" class="btn btn-success" type="button">
+                            <span class="badge">{{ post.like }}</span> Likes
+                        </a>
+                        <a href="{{ path("app_post_get", {"id" : post.id}) }}#comments" class="btn btn-danger" type="button">
+                            <span class="badge">{{ post.dislike }}</span> Dislikes
+                        </a>
                     </div>
                 </div>
             </div>
