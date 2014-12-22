@@ -10,7 +10,9 @@ class AddImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('long_url');
+            ->add('long_url', 'text', [
+                'required' => true
+            ]);
 
     }
 
