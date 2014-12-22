@@ -17,14 +17,14 @@
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">My Christmas</a>
+                    <span class="navbar-brand">My Christmas</span>
                 </div>
 
                 <div>
                     <ul class="nav navbar-nav">
                         <li {% if currentPath == "/" %} class="active" {% endif %}><a href="{{ path('app_default_index') }}">Home</a></li>
                         <li {% if "/post/top" in currentPath %} class="active" {% endif %}><a href="{{ path("app_post_top") }}">Top 20</a></li>
-                        <li {% if "/post/create" in currentPath %} class="active" {% endif %}><a href="{{ path('app_post_create') }}">Sharing</a></li>
+                        <li {% if "/post/create" in currentPath %} class="active" {% endif %}><a href="{{ path('app_post_create') }}">Share your story</a></li>
                     </ul>
                 </div>
             </div>
