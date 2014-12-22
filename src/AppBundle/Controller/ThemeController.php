@@ -34,7 +34,7 @@ class ThemeController extends Controller
     }
 
     /**
-     * @return object|void
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/{slug}/view")
      * @Template()
